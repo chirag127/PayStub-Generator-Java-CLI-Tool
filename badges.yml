@@ -1,0 +1,61 @@
+# Badges Configuration
+
+# This file defines the badges to be displayed in the README.
+# It follows the Shields.io standard format.
+
+# Base URL for all badges, dynamically generated.
+base_url: "https://img.shields.io"
+
+# User and repository name for badge generation.
+user: "chirag127"
+repo: "PayStub-Generator-Java-CLI-Tool"
+
+# Badge definitions
+badges:
+  - name: "Build Status"
+    icon: "github"
+    color: "brightgreen"
+    url: "${base_url}/github/actions/workflow/status/${user}/${repo}/.github/workflows/ci.yml?branch=main&label=Build"
+    markdown: "[![Build Status](https://img.shields.io/github/actions/workflow/status/${user}/${repo}/.github/workflows/ci.yml?branch=main&label=Build)](${base_url}/github/actions/workflow/status/${user}/${repo}/.github/workflows/ci.yml?branch=main)"
+
+  - name: "Code Coverage"
+    icon: "codecov"
+    color: "blue"
+    # Assuming Codecov is used and configured. Replace with actual URL if different.
+    url: "https://codecov.io/gh/${user}/${repo}?branch=main"
+    markdown: "[![Code Coverage](https://codecov.io/gh/${user}/${repo}?branch=main)](${base_url}/codecov/gh/${user}/${repo}?branch=main)"
+
+  - name: "Java Version"
+    icon: "java"
+    color: "orange"
+    # Placeholder for specific Java version if determined. Assume 17+ for modern.
+    value: "17+"
+    url: "${base_url}/badge/Java-17+-orange"
+    markdown: "[![Java Version](https://img.shields.io/badge/Java-17+-orange)](${base_url}/badge/Java-17+-orange)"
+
+  - name: "Build Tool"
+    icon: "maven"
+    color: "red"
+    value: "Maven"
+    url: "${base_url}/badge/Maven-Built-red"
+    markdown: "[![Build Tool](https://img.shields.io/badge/Maven-Built-red)](${base_url}/badge/Maven-Built-red)"
+
+  - name: "Testing Framework"
+    icon: "junit"
+    color: "blueviolet"
+    value: "JUnit"
+    url: "${base_url}/badge/JUnit-Tested-blueviolet"
+    markdown: "[![Testing Framework](https://img.shields.io/badge/JUnit-Tested-blueviolet)](${base_url}/badge/JUnit-Tested-blueviolet)"
+
+  - name: "License"
+    icon: "license"
+    color: "97ca00"
+    value: "CC BY-NC 4.0"
+    url: "${base_url}/badge/License-CC%20BY--NC%204.0-97ca00"
+    markdown: "[![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-97ca00)](${base_url}/badge/License-CC%20BY--NC%204.0-97ca00)"
+
+  - name: "GitHub Stars"
+    icon: "github"
+    color: "yellow"
+    url: "https://github.com/${user}/${repo}"
+    markdown: "[![GitHub Stars](https://img.shields.io/github/stars/${user}/${repo}?color=yellow&label=Stars)](${base_url}/github/stars/${user}/${repo}?color=yellow&label=Stars)"
