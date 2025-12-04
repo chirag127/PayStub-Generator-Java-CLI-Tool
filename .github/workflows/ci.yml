@@ -1,0 +1,75 @@
+# CI Workflow for PayStub-Generator-Java-CLI-Tool
+
+# Trigger workflow on push events to the main branch and on pull requests targeting the main branch.
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+name: CI Workflow
+
+jobs:
+  build-and-test:
+    # Using the latest Ubuntu image for the runner.
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository code.
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up JDK 17. This is a common requirement for many Java projects.
+      # Ensure this matches the project's intended Java version.
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      # Step 3: Build the project using Maven.
+      # This command compiles the code, runs tests (if configured in pom.xml), and packages the application.
+      - name: Build with Maven
+        run: mvn clean install -DskipTests
+
+      # Step 4: Run unit tests.
+      # This executes all tests defined in the project's test sources.
+      - name: Run Unit Tests
+        run: mvn test
+
+      # Step 5: Upload test results (JUnit XML format) for better visibility in GitHub Actions.
+      # This step helps in analyzing test outcomes directly from the GitHub UI.
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        if: always() # Upload artifacts even if previous steps failed.
+        with:
+          name: test-results
+          path: target/surefire-reports/
+
+      # Step 6: (Optional) Upload code coverage reports.
+      # Requires code coverage tools (like JaCoCo) configured in pom.xml.
+      # For this example, assuming JaCoCo is used.
+      - name: Upload Code Coverage Report
+        uses: actions/upload-artifact@v4
+        if: success() # Only upload if tests passed.
+        with:
+          name: code-coverage
+          path: target/site/jacoco/
+
+      # Step 7: (Optional) Publish code coverage to Codecov.
+      # This step requires a Codecov token, typically set as a secret in repository settings.
+      # - name: Upload coverage to Codecov
+      #   uses: codecov/codecov-action@v4
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     directory: target/site/jacoco/
+
+      # Step 8: Linting and Formatting Check (if integrated with Maven plugins like checkstyle or PMD).
+      # Assumes Maven plugins are configured for static analysis.
+      - name: Lint and Format Check
+        run: mvn checkstyle:check pmd:check
+        # If using a separate linter like PMD or Checkstyle, the command would be adjusted.
+        # For example, if PMD is configured, you might run `mvn pmd:check`.
+        # If Checkstyle is configured, you might run `mvn checkstyle:check`.
+        # The above command assumes both are configured and need to run.
