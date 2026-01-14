@@ -1,0 +1,196 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Employee-slip-app-BM-JWDC | Java CLI Payroll Generator</title>
+  <meta name="description" content="A simple Java-based CLI application that generates employee salary slips with HRA, DA, TA, PF, and gross salary calculation. Part of the Brain Mentors Java Web Development Course.">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          backdropBlur: {
+            xs: '2px',
+          },
+          backgroundColor: {
+            glass: 'rgba(255, 255, 255, 0.08)',
+          },
+          borderColor: {
+            glass: 'rgba(255, 255, 255, 0.2)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      color: #e2e8f0;
+    }
+    .glass-card {
+      background: rgba(30, 41, 59, 0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+    code {
+      @apply bg-gray-800 text-cyan-300 px-2 py-1 rounded text-sm font-mono;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="py-6 px-6 md:px-12 flex justify-between items-center border-b border-glass">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex items-center justify-center">
+        <span class="text-white font-bold text-lg">E</span>
+      </div>
+      <h1 class="text-xl md:text-2xl font-bold text-white">Employee-slip-app</h1>
+    </div>
+    <a href="https://github.com/chirag127/Employee-slip-app-BM-JWDC" target="_blank" class="text-cyan-400 hover:text-cyan-300 transition flex items-center space-x-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+      </svg>
+      <span class="text-sm font-medium">View on GitHub</span>
+    </a>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow py-12 px-6 md:px-12 max-w-6xl mx-auto w-full">
+
+    <!-- Hero Section -->
+    <section class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-4">
+        Employee Salary Slip Generator
+      </h2>
+      <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+        A simple Java CLI application developed as part of the <strong class="text-white">Brain Mentors Java Web Development Course</strong>. 
+        It takes employee details and generates a detailed salary slip with allowances and deductions.
+      </p>
+    </section>
+
+    <!-- Features & Inputs/Outputs -->
+    <div class="grid md:grid-cols-2 gap-10 mb-16">
+
+      <!-- Inputs -->
+      <div class="glass-card p-8">
+        <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
+          <span class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mr-3 text-sm">📝</span>
+          Inputs Required
+        </h3>
+        <ul class="space-y-4">
+          <li class="flex items-center text-gray-200">
+            <span class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></span>
+            <strong>Employee Name</strong> – Full name of the employee
+          </li>
+          <li class="flex items-center text-gray-200">
+            <span class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></span>
+            <strong>Employee ID</strong> – Unique identifier for the employee
+          </li>
+          <li class="flex items-center text-gray-200">
+            <span class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></span>
+            <strong>Basic Salary</strong> – Base salary amount (INR)
+          </li>
+        </ul>
+      </div>
+
+      <!-- Outputs -->
+      <div class="glass-card p-8">
+        <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
+          <span class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-3 text-sm">📄</span>
+          Generated Output
+        </h3>
+        <ul class="space-y-4">
+          <li class="flex items-center text-gray-200">
+            <span class="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
+            <strong>Employee Name & ID</strong>
+          </li>
+          <li class="flex items-center text-gray-200">
+            <span class="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
+            <strong>Basic Salary</strong>
+          </li>
+          <li class="flex items-center text-gray-200">
+            <span class="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
+            <strong>HRA (50%)</strong> – House Rent Allowance
+          </li>
+          <li class="flex items-center text-gray-200">
+            <span class="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
+            <strong>DA (30%)</strong> – Dearness Allowance
+          </li>
+          <li class="flex items-center text-gray-200">
+            <span class="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
+            <strong>TA (15%)</strong> – Travel Allowance
+          </li>
+          <li class="flex items-center text-gray-200">
+            <span class="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
+            <strong>PF (12%)</strong> – Provident Fund Deduction
+          </li>
+          <li class="flex items-center text-gray-200 font-medium">
+            <span class="w-2 h-2 bg-green-400 rounded-full mr-3"></span>
+            <strong>Gross Salary</strong> – Total earnings after deductions
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Technology & Code Snippet -->
+    <section class="glass-card p-8 mb-16">
+      <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
+        <span class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mr-3 text-sm">⚡</span>
+        Built with Java
+      </h3>
+      <p class="text-gray-300 mb-6">
+        This command-line interface (CLI) application is fully written in <strong class="text-white">Java</strong>, 
+        demonstrating core programming concepts like input handling, arithmetic operations, and formatted output.
+      </p>
+      <div class="bg-gray-900 rounded-lg p-5 overflow-x-auto">
+        <pre class="text-green-400 text-sm"><code>public class SalarySlip {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter Employee Name: ");
+        String name = sc.nextLine();
+        
+        System.out.print("Enter Employee ID: ");
+        int id = sc.nextInt();
+        
+        System.out.print("Enter Basic Salary: ");
+        double basic = sc.nextDouble();
+
+        double hra = 0.5 * basic;
+        double da = 0.3 * basic;
+        double ta = 0.15 * basic;
+        double pf = 0.12 * basic;
+        double gross = basic + hra + da + ta - pf;
+
+        System.out.println("\n--- Salary Slip ---");
+        System.out.println("Name: " + name);
+        System.out.println("ID: " + id);
+        System.out.println("Basic: " + basic);
+        System.out.println("HRA: " + hra);
+        System.out.println("DA: " + da);
+        System.out.println("TA: " + ta);
+        System.out.println("PF: " + pf);
+        System.out.println("Gross: " + gross);
+    }
+}</code></pre>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="text-center">
+      <a href="https://github.com/chirag127/Employee-slip-app-BM-JWDC" target="_blank" class="inline-flex items-center space-x-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 

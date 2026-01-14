@@ -1,0 +1,258 @@
+Since you're requesting the **`docs/styles.css`** file content for a modern, glassmorphism-styled website for the project **Employee-slip-app-BM-JWDC**, and the context indicates a **modern CSS** file (likely to be used with Tailwind via CDN or custom styles), but you want it as a **standalone CSS file** implementing **Glassmorphism**, here's a **custom `styles.css`** file that delivers a **modern glassmorphism UI** without relying solely on Tailwind (in case you want full control or fallback).
+
+> ✅ This file is ideal for use in `index.html`, `about.html`, or `contact.html` with clean, modern, responsive glassmorphism design.
+
+---
+
+### ✅ File: `docs/styles.css`
+
+```css
+/* =========================================
+   Employee-slip-app-BM-JWDC - Modern Glassmorphism Styles
+   Author: Chirag Singhal
+   Copyright (c) 2026 Chirag Singhal
+   ========================================= */
+
+/* Base Reset & Typography */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #e0f7fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.6;
+}
+
+/* Container */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  flex: 1;
+}
+
+/* Glassmorphism Card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  color: #ffffff;
+}
+
+.glass-card h1,
+.glass-card h2,
+.glass-card h3 {
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.glass-card p,
+.glass-card ul {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.glass-card ul {
+  padding-left: 1.5rem;
+}
+
+/* Input Forms (for employee slip input) */
+.glass-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.glass-form input {
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  color: #333;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.glass-form input:focus {
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+.glass-form button {
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background: #00bfa5;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.glass-form button:hover {
+  background: #00897b;
+}
+
+/* Output Table Styling */
+.output-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.output-table th,
+.output-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.output-table th {
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-weight: 600;
+}
+
+.output-table tr:last-child td {
+  border-bottom: none;
+}
+
+.output-table tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+  color: #b2ebf2;
+  margin-top: auto;
+}
+
+footer a {
+  color: #4fc3f7;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+    padding: 1rem;
+  }
+
+  .glass-card {
+    padding: 1.5rem;
+  }
+
+  .output-table {
+    font-size: 0.9rem;
+  }
+
+  footer {
+    font-size: 0.85rem;
+  }
+}
+
+/* About Page - Resume Layout (if on about.html) */
+.resume-section {
+  margin-bottom: 2rem;
+}
+
+.resume-section h3 {
+  color: #4fc3f7;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.resume-item {
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  border-left: 3px solid #00bfa5;
+}
+
+.resume-item h4 {
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin-bottom: 0.2rem;
+}
+
+.resume-item p {
+  color: #b2ebf2;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Contact Page - Email Link */
+.contact-email {
+  font-size: 1.2rem;
+  color: #4fc3f7;
+  margin: 1rem 0;
+  word-break: break-all;
+}
+
+.contact-email a {
+  text-decoration: none;
+  border-bottom: 1px dashed #4fc3f7;
+}
+
+.contact-email a:hover {
+  color: #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+```
+
+---
+
+### 💡 How to Use
+
+1. Save this file as: `docs/styles.css`
+2. Link it in your HTML files:
+
+```html
+<link rel="stylesheet" href="docs/styles.css">
+```
+
+3. Use classes like `glass-card`, `glass-form`, `output-table`, `resume-section`, etc., in your HTML structure.
+
+---
+
+### ✅ Features
+
+- **Glassmorphism design** with blur and transparency
+- **Fully responsive**
+- Supports **input forms**, **output tables**, **resume layout**, and **contact info**
+- Professional gradient background
+- Footer with required **copyright notice**
+
+> ✅ Footer will display:  
+> `Copyright (c) 2026 Chirag Singhal | Designed by Chirag Singhal`
+
+Let me know if you'd like the corresponding `index.html`, `about.html`, or `contact.html` files to go with this CSS!
